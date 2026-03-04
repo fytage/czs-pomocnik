@@ -1,0 +1,26 @@
+{
+  "name": "czs-profile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "register": "node register.js"
+  },
+  "dependencies": {
+    "@google/genai": "^1.15.0",
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.9.0",
+    "cheerio": "^1.0.0",
+    "discord-interactions": "^4.1.1",
+    "discord.js": "^14.25.1",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "luxon": "^3.7.2",
+    "mysql2": "^3.18.0",
+    "node-cron": "^4.2.1",
+    "node-fetch": "^3.3.2",
+    "path": "^0.12.7"
+  }
+}

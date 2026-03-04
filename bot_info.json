@@ -1,0 +1,16 @@
+{
+  "version": "4.0",
+  "installCount": 23,
+  "changelog": [
+    "Přidané pomocné systémy pro tickety",
+    "Přidaná možnost manuálně odpovídat lidem na otázky před-definovanými odpovědmi",
+    "Vylepšená AI detekce a prompt na odpovídání otázek",
+    "Upravený systém nápadů aby bylo vše v jednom modalu",
+    "Přidaný systém inzerátů",
+   	"Hráči nyní nebudou moct reagovat (hlasovat) na vlastní nápady",
+    "Aktualizované /at",
+    "Přidané emoji pro nové helpery a moderátory pro zobrazení banlistu skrz /profile",
+    "Kontrolování statusu serveru je nyní častější, musím ještě přijít proč načtení skrz /status trvá ukrutně dlouho"
+  ],
+  "commandStats": {}
+}
