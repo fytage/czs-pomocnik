@@ -24,9 +24,9 @@ export default {
 <:Siska_3:1391188922951929966>\`\u200B\`**Moderátorka** Siska\\_3
 <:Aphofis63:1391188900776640642>\`\u200B\`**Moderátor** Aphofis63
 <:Midnase:1391188961396916267>\`\u200B\`**Helperka** Midnase
-<:Tonda08cz:1322657846470377553>\`\u200B\`**Helper** Tonda08cz
 <:Gregi16:1447226974060937348>\`\u200B\`**Helper** Gregi16
 <:xTheAlpha:1447226798977974363>\`\u200B\`**Helper** xTheAlpha
+<:ULR1K_:1322657615058042940>\`\u200B\`**Hl. Eventer** ULR1K\\_
 <:cpyay998:1355303423196659739>\`\u200B\`**Eventerka+** cpyay998
 <:Shungejm:1355303442691657728>\`\u200B\`**Eventer+** Shungejm
 <:PanMrkvik:1391189028417831022>\`\u200B\`**Eventer** PanMrkvik
@@ -40,7 +40,6 @@ export default {
 <:LoveWillKillU:1355303520642793595>\`\u200B\`**Builder** LoveWillKillU
 <:karosene0:1428069058171113482>\`\u200B\`**Builder** karosene0
 <:Ocel23:1355303577509433344>\`\u200B\`**Developer** Ocel23
-<:ULR1K_:1322657615058042940>\`\u200B\`**Developer** ULR1K\\_
 <:fytage:1322915893742669894>\`\u200B\`**Developer** fytage
             `);
         await interaction.reply({
