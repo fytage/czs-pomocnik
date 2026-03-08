@@ -228,6 +228,24 @@ const HELPER_COMMAND = {
     contexts: [0],
 };
 
+const STICKY_COMMAND = {
+  name: 'sticky',
+  type: 1, // CHAT_INPUT
+  guild_id: '484381897900949525',
+  description: 'Vytvoří sticky zprávu v tomto kanálu.',
+  default_member_permissions: '8192', // MANAGE_MESSAGES
+  integration_types: [0],
+  contexts: [0],
+  options: [
+    {
+      name: 'zprava',
+      description: 'Text sticky zprávy',
+      type: 3, // STRING
+      required: true
+    }
+  ]
+};
+
 const ALL_COMMANDS = [
   PROFILE_COMMAND,
   AT_COMMAND,
@@ -243,6 +261,7 @@ const ALL_COMMANDS = [
   HELPER_COMMAND,
   GCREATE_COMMAND,
   TOGGLE_SUNDAY_COMMAND,
+  STICKY_COMMAND,
 ];
 
 // Call the command registration function

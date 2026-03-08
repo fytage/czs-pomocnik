@@ -17,6 +17,7 @@ import napadCommand, { getSuggestionsData, SUGGESTIONS_CHANNEL_ID } from './comm
 import approveSuggestionCommand from './context-menus/approveSuggestion.js';
 import considerSuggestionCommand from './context-menus/considerSuggestion.js';
 import denySuggestionCommand from './context-menus/denySuggestion.js';
+import { getStickyMessages, saveStickyMessages } from './stickyHandler.js';
 
 const IGNORED_AI_IDS = {
   // Add category IDs here to ignore all channels within them
@@ -124,6 +125,45 @@ const IGNORED_AI_IDS = {
         await handleTicketMessage(message);
         await handleTicketStaffCommand(message);
         if (message.author.bot) return;
+
+        // Sticky Message Logic
+        const stickyMessages = getStickyMessages();
+        const stickyData = stickyMessages[message.channel.id];
+        
+        if (stickyData) {
+            const now = Date.now();
+            const cooldown = 30000; // 30s
+            if (now - stickyData.lastStickyTime > cooldown) {
+                try {
+                    let shouldSend = false;
+                    try {
+                        const oldMessage = await message.channel.messages.fetch(stickyData.messageId);
+                        if (oldMessage) {
+                            await oldMessage.delete();
+                            shouldSend = true;
+                        }
+                    } catch (err) {
+                        if (err.code === 10008) { // Unknown Message
+                             // Manually deleted by mod -> Stop sticking
+                             delete stickyMessages[message.channel.id];
+                             saveStickyMessages(stickyMessages);
+                        } else {
+                            console.error("Error handling sticky message:", err);
+                        }
+                    }
+
+                    if (shouldSend) {
+                         const newMsg = await message.channel.send(stickyData.content);
+                         stickyMessages[message.channel.id].messageId = newMsg.id;
+                         stickyMessages[message.channel.id].lastStickyTime = Date.now();
+                         saveStickyMessages(stickyMessages);
+                    }
+                } catch (err) {
+                    console.error("Error specific to send/update sticky:", err);
+                }
+            }
+        }
+
         if (await handleLogTrigger(message)) {
             return;
         }
