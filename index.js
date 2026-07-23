@@ -1,8 +1,8 @@
 // index.js
 import 'dotenv/config';
 import { 
-    Client, GatewayIntentBits, Collection, Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Partials
-  } from 'discord.js';
+  Client, GatewayIntentBits, Collection, Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Partials
+} from 'discord.js';
 import fs from 'fs';
 import path from 'path';
 import { startStatusChecker, statusCache } from './status-checker.js';
@@ -14,6 +14,7 @@ import { handleTicketMessage, initTicketScheduler, handleTicketStaffCommand } fr
 import { handleLogTrigger } from './logHandler.js';
 
 import napadCommand, { getSuggestionsData, SUGGESTIONS_CHANNEL_ID } from './commands/napad.js';
+import atNapadCommand, { getATSuggestionsData, AT_SUGGESTIONS_CHANNEL_ID } from './commands/atnapad.js';
 import approveSuggestionCommand from './context-menus/approveSuggestion.js';
 import considerSuggestionCommand from './context-menus/considerSuggestion.js';
 import denySuggestionCommand from './context-menus/denySuggestion.js';
@@ -23,14 +24,14 @@ const IGNORED_AI_IDS = {
   // Add category IDs here to ignore all channels within them
   categories: [
     '591954896899538954', 
-   	'1409535866728353842',
+    '1409535866728353842',
     '1291762048925175860',
     '761613768207368242',
     '881077905596227614',
     '881081062946639882',
     '1280198501715808443',
     '881076137260900372',
-	'881079036925849600',
+    '881079036925849600',
     '1316520856784076800',
     '1140772319585906801',
   ],
@@ -38,6 +39,37 @@ const IGNORED_AI_IDS = {
   channels: [
     '580749024584531984',
   ],
+};
+
+// --- Error and Warning Logger ---
+const LOG_FILE_PATH = path.join(process.cwd(), 'errors-warnings.log');
+
+function logToFile(type, ...args) {
+    const timestamp = new Date().toISOString();
+    // Convert object structures/errors nicely, otherwise use standard string layout
+    const formattedArgs = args.map(arg => {
+        if (arg instanceof Error) return arg.stack || arg.message;
+        if (typeof arg === 'object') return JSON.stringify(arg, null, 2);
+        return arg;
+    });
+    
+    const logMessage = `[${timestamp}] [${type.toUpperCase()}]: ${formattedArgs.join(' ')}\n\n`;
+    
+    fs.appendFileSync(LOG_FILE_PATH, logMessage, 'utf8');
+}
+
+// Keep a backup of original console behaviors so they still output to terminal
+const originalConsoleError = console.error;
+const originalConsoleWarn = console.warn;
+
+console.error = function(...args) {
+    logToFile('error', ...args);       // Write to your log file
+    originalConsoleError(...args);     // Print to standard terminal
+};
+
+console.warn = function(...args) {
+    logToFile('warning', ...args);     // Write to your log file
+    originalConsoleWarn(...args);      // Print to standard terminal
 };
 
 // Main async function to run the bot
@@ -68,7 +100,6 @@ const IGNORED_AI_IDS = {
     client.tradeManager = new TradeManager(client);
 
     // --- Command Loading ---
-    // (This section is unchanged and works correctly)
     const commandsPath = path.join(process.cwd(), 'commands');
     const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
@@ -78,7 +109,7 @@ const IGNORED_AI_IDS = {
         if ('data' in command.default && 'execute' in command.default) {
             client.commands.set(command.default.data.name, command.default);
         } else {
-            console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+            console.warn(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
         }
     }
 
@@ -91,7 +122,7 @@ const IGNORED_AI_IDS = {
         if ('data' in command.default && 'execute' in command.default) {
             client.commands.set(command.default.data.name, command.default);
         } else {
-            console.log(`[WARNING] The context menu at ${filePath} is missing a required "data" or "execute" property.`);
+            console.warn(`[WARNING] The context menu at ${filePath} is missing a required "data" or "execute" property.`);
         }
     }
 
@@ -106,18 +137,16 @@ const IGNORED_AI_IDS = {
         console.log('\x1b[32m%s\x1b[0m', 'System inzeratu byl nacten.');
     });
 
-    // --- UPDATED --- Moved static replies to a separate constant
     const autoReplies = {
-      ip: "🔢 IP našeho serveru je **mc.czech-survival.cz**, pro Bedrock platí **bedrock.czech-survival.cz** a port 19111 a podporujeme verze od 1.9 až po 1.21.11 😉 (Servery běží na 1.21.11)\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
-      hotspot: "📶 Pokud se nemůžeš připojit přes hotspot, je potřeba si **otevřít ticket a požádat o povolení**. To můžeš udělat v <#865270530173042728>, kde klikneš na tlačítko \"Ostatní\" a počkáš na admina.\nOmlouváme se za potíže, tohle děláme pro bezpečnost a stabilitu serveru.\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
+      ip: "🔢 IP našeho serveru je **mc.czech-survival.cz**, pro Bedrock platí **bedrock.czech-survival.cz** a port 19111 a podporujeme verze od 1.9 až po 26.1.x 😉 (Servery běží na 1.21.11)\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
+      hotspot: "📶 Pokud se nemůžeš připojit přes hotspot, je potřeba si **otevřít ticket a požádat o povolení**. To můžeš udělat v <#865270530173042728>, kde klikneš na tlačítko \"Ostatní\" a počkáš na admina.\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
       ticket: "🎫 Ticket pro nahlášení problému nebo žádost o unban si můžeš vytvořit v kanálu <#865270530173042728>. Vyber si správnou kategorii a popiš svůj problém co nejdetailněji.\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
       support: "👋 Potřebuješ pomoc? Náš support tým ti je k dispozici v ticketech. Vytvoř si ho prosím v kanálu <#865270530173042728> a my se ti budeme co nejdříve věnovat.\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
       shop: "🛒 Klíče, Ranky a Pass nakoupíš na našem eshopu na https://www.czech-survival.cz/eshop. Pokud potřebuješ další asistenci, neboj se si otevřít ticket v <#865270530173042728> kliknutím na tlačítko \"Platby / E-shop\".\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
       unban: "🆘 Chceš si požádat o unban? Náš tým ti může pomoci v ticketu. Vytvoř si ho prosím v kanálu <#865270530173042728> a my se ti budeme co nejdříve věnovat. Nezapomeň být slušný a trpělivý.\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
       stiznost: "😢 Máš stížnost na server nebo člena AT? Budeš si muset vytvořit ticket. Vytvoř si ho prosím v kanálu <#865270530173042728> v kategorii \"Ostatní\" a my se ti budeme co nejdříve věnovat.\nPokud by jsi měl zájem člena AT ohodnotit, hodnocení najdeš na našich stránkách https://www.czech-survival.cz/admin-team.\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
       discordlink: "🔗 Chceš dostat rank ze hry na Discordu? Budeš si muset propojit Minecraft a Discord účet. Návod na propojení najdeš v kanálu <#1344347947709763716>.\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
-      nabor: "🤝 Chceš se přidat do našeho týmu? Momentálně probíhá **nábor na Helpera**! Informace najdeš zde: https://discord.com/channels/484381897900949525/580749024584531984/1459522916231413831.\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
-      // nabor: "🤝 Chceš se přidat do našeho týmu? Momentálně **neprobíhá žádný nábor**, ale pokud budeš sledovat náš discord a oznámení tak budeš o nových náborech vědět jako první.\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
+      nabor: "🤝 Chceš se přidat do našeho týmu? Momentálně **neprobíhá žádný nábor**, ale pokud budeš sledovat náš discord a oznámení tak budeš o nových náborech vědět jako první. Zároveň taky máme na nábory stránku: [klikni sem!](<https://www.czech-survival.cz/nabor>)\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
       passwordhelp: "🔑 Zapomněl jsi své heslo? Pokud máš propojený účet se stránkami, můžeš si ho změnit sám [kliknutím sem](<https://www.czech-survival.cz/player/change-password-mc>). Pokud nemáš propojený účet, aby jsme ti mohli pomoci, prosím vytvoř si ticket v kanálu <#865270530173042728> a klikni na tlačítko **Zapomenuté heslo / unlink**\n-# Jsem automatizovaný robot a na další dotazy neodpovím. 🤖",
     };
     
@@ -239,14 +268,18 @@ const IGNORED_AI_IDS = {
         // Handle Modal Submissions
         else if (interaction.isModalSubmit()) {
             const customId = interaction.customId;
+						console.log(`[modal-submit] customId=${customId}`);
 
             try {
-                if (customId.startsWith('suggestion-modal')) {
-                    await napadCommand.handleModal(interaction);
-                } 
-                else if (customId.startsWith('decision-modal_approve')) {
-                    await approveSuggestionCommand.handleModal(interaction);
-                }
+                if (customId.startsWith('suggestion-modal_at_')) {
+    await atNapadCommand.handleModal(interaction);
+}
+else if (customId.startsWith('suggestion-modal_normal_')) {
+    await napadCommand.handleModal(interaction);
+}
+               else if (customId.startsWith('decision-modal_at_approve') || customId.startsWith('decision-modal_normal_approve')) {
+await approveSuggestionCommand.handleModal(interaction);
+}
                 else if (customId.startsWith('helper-modal_')) {
                     const targetMessageId = customId.split('_')[1];
                     const component = interaction.components.find(r => r.component.customId === 'helper-select')?.component;
@@ -270,12 +303,12 @@ const IGNORED_AI_IDS = {
                         await interaction.reply({ content: 'Neplatný výběr nebo chybějící text odpovědi.', ephemeral: true });
                     }
                 }
-                else if (customId.startsWith('decision-modal_consider')) {
-                    await considerSuggestionCommand.handleModal(interaction);
-                }
-                else if (customId.startsWith('decision-modal_deny')) {
-                    await denySuggestionCommand.handleModal(interaction);
-                }
+                else if (customId.startsWith('decision-modal_at_consider') || customId.startsWith('decision-modal_normal_consider')) {
+    await considerSuggestionCommand.handleModal(interaction);
+}
+                else if (customId.startsWith('decision-modal_at_deny') || customId.startsWith('decision-modal_normal_deny')) {
+    await denySuggestionCommand.handleModal(interaction);
+}
             } catch (error) {
                 console.error(`Error handling modal submission "${customId}":`, error);
                 if (interaction.replied || interaction.deferred) {
@@ -291,7 +324,10 @@ const IGNORED_AI_IDS = {
 
             // --- NEW --- Route poznamky buttons to its command handler first
             if (customId.startsWith('poznamky_')) {
-                return poznamkyCommand.handleButton(interaction).catch(console.error);
+                // Ensure poznamkyCommand is properly imported/defined in your environment if using this
+                if (typeof poznamkyCommand !== 'undefined') {
+                    return poznamkyCommand.handleButton(interaction).catch(console.error);
+                }
             }
 
             // Handle Giveaway Button Clicks
@@ -384,6 +420,16 @@ const IGNORED_AI_IDS = {
         }
     });
 
+    // Safety net for runtime panics that evade try/catch blocks
+    process.on('unhandledRejection', (reason, promise) => {
+        console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    });
+
+    process.on('uncaughtException', (error) => {
+        console.error('Uncaught Exception caught:', error);
+    });
+
     // Login to Discord
     client.login(process.env.DISCORD_TOKEN);
+    console.log('Prihlasen pomoci tokenu.')
 })();

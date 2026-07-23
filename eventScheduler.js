@@ -49,10 +49,10 @@ export async function startEventListener(client) {
                 .join("\n");
 
             const embed = new EmbedBuilder()
-                .setTitle("<:czs:1436675872307281943> Seznam Nedělních Eventů <:czs:1436675872307281943>")
-                .setDescription(`Na **neděli ${sundayDate}** si pro vás eventeři připravili tyto eventy:\n\n${eventList}`)
+                .setTitle(`<:czs:1436675872307281943> Seznam Eventů ${sundayDate} <:czs:1436675872307281943>`)
+                .setDescription(`Na **${sundayDate}** si pro vás eventeři připravili tyto eventy:\n\n${eventList}`)
                 .setColor("#EB853D")
-                .setFooter({ text: "Eventy začínají v neděli 19:00. Přejeme hodně štěstí!", iconURL: 'https://i.imgur.com/jNMbF95.png' });
+                .setFooter({ text: "Eventy začínají zítra v 19:00. Přejeme hodně štěstí!", iconURL: 'https://i.imgur.com/jNMbF95.png' });
                 
             const channel = await client.channels.fetch(EVENT_CHANNEL_ID);
             if (channel) {
@@ -69,7 +69,7 @@ export async function startEventListener(client) {
     });
 
     // --- Cron Job 2: 30 Minute Reminder ---
-    cron.schedule("30 18 * * 7", async () => {
+    cron.schedule("30 18 * * *", async () => {
         try {
             // 1. Get today's date (which must be Sunday)
             const now = DateTime.now().setZone(TIMEZONE);
@@ -95,7 +95,7 @@ export async function startEventListener(client) {
             // 4. Send the reminder (if not cancelled and exists)
             const channel = await client.channels.fetch(EVENT_CHANNEL_ID);
             if (channel) {
-                await channel.send("[<@&761592424966914048>]\n\nZa 30 minut začínají nedělní eventy!");
+                await channel.send("[<@&761592424966914048>]\n\nZa 30 minut začínají eventy!");
                 console.log(`Sent the 30-minute event reminder for ${todayDateString}.`);
             }
         } catch (error) {

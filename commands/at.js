@@ -14,18 +14,18 @@ export default {
         const embed = new EmbedBuilder()
             .setTitle('Aktuální Členi AT')
             .setColor(0xEB853D)
-            .setFooter({ text: `Naposledy upraveno 7/12/2025` })
+            .setFooter({ text: `Naposledy upraveno 2/5/2026` })
             .setDescription(`
 <:Teleriann:1322657515728535563>\`\u200B\`**Majitel** Teleriann
 <:Zone_Creep_:1322657534632530033>\`\u200B\`**Adminka** Zone\\_Creep\\_
 <:ImB0T:1322657778141233153>\`\u200B\`**Admin** ImB0T
-<:Sh3rman:1322657752774086696>\`\u200B\`**Hl. Moderátor** Sh3rman
 <:Nelkaa2808:1391188983463153814>\`\u200B\`**Moderátorka** Nelkaa2808
 <:Siska_3:1391188922951929966>\`\u200B\`**Moderátorka** Siska\\_3
 <:Aphofis63:1391188900776640642>\`\u200B\`**Moderátor** Aphofis63
-<:Midnase:1391188961396916267>\`\u200B\`**Helperka** Midnase
-<:Gregi16:1447226974060937348>\`\u200B\`**Helper** Gregi16
+<:Gregi16:1447226974060937348>\`\u200B\`**Moderátor** Gregi16
+<:verussqa00:1500095830819082334>\`\u200B\`**Helper** verussqa00
 <:xTheAlpha:1447226798977974363>\`\u200B\`**Helper** xTheAlpha
+<:bilitiger:1500095832425238568>\`\u200B\`**Helper** bilitiger
 <:ULR1K_:1322657615058042940>\`\u200B\`**Hl. Eventer** ULR1K\\_
 <:cpyay998:1355303423196659739>\`\u200B\`**Eventerka+** cpyay998
 <:Shungejm:1355303442691657728>\`\u200B\`**Eventer+** Shungejm
@@ -39,7 +39,6 @@ export default {
 <:_Hrci:1355303500640157727>\`\u200B\`**Builder** \\_Hrci
 <:LoveWillKillU:1355303520642793595>\`\u200B\`**Builder** LoveWillKillU
 <:karosene0:1428069058171113482>\`\u200B\`**Builder** karosene0
-<:Ocel23:1355303577509433344>\`\u200B\`**Developer** Ocel23
 <:fytage:1322915893742669894>\`\u200B\`**Developer** fytage
             `);
         await interaction.reply({

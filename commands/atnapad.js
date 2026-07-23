@@ -10,39 +10,55 @@ import { SlashCommandBuilder,
 import fs from 'fs';
 import path from 'path';
 
-const SUGGESTIONS_FILE = path.join(process.cwd(), 'suggestions.json');
-export const SUGGESTIONS_CHANNEL_ID = '1078352191213023282';
+const SUGGESTIONS_FILE = path.join(process.cwd(), 'at-suggestions.json');
+export const AT_SUGGESTIONS_CHANNEL_ID = '1527735048546291763';
 const LOG_CHANNEL_ID = process.env.SUGGESTIONS_LOG_CHANNEL_ID;
 
 // --- NEW: Role and Cooldown Configuration ---
-const REQUIRED_ROLE_ID = '964486763580112896';
+const ALLOWED_ROLE_IDS = [
+    '628647783833796628',
+    '716727184080896091',
+    '1010953292962091070',
+    '679738119062290452',
+    '1024299994670440518',
+    '896651142182866954',
+    '580145240065966119',
+    '574196886831890474',
+    '574196845048365076',
+    '1066380018676154388',
+    '848219128090853407',
+    '574196945594351618',
+    '679802577080287239',
+    '589184684571754506',
+    '574196518819463188',
+];
 const COOLDOWN_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
 const cooldowns = new Collection();
 // --- END NEW ---
 
 // Helper function to read/write suggestion data
-export function getSuggestionsData() {
+export function getATSuggestionsData() {
     if (!fs.existsSync(SUGGESTIONS_FILE)) {
         return { nextId: 1, suggestions: {} };
     }
     return JSON.parse(fs.readFileSync(SUGGESTIONS_FILE, 'utf8'));
 }
 
-function saveSuggestionsData(data) {
+function saveATSuggestionsData(data) {
     fs.writeFileSync(SUGGESTIONS_FILE, JSON.stringify(data, null, 2));
 }
 
 export default {
     data: new SlashCommandBuilder()
-        .setName('napad')
-        .setDescription('Odešli nový nápad pro server nebo Discord.'),
+        .setName('at-napad')
+        .setDescription('Odešli nový AT nápad pro server nebo Discord.'),
 
     async execute(interaction) {
         try {
-            if (!interaction.member.roles.cache.has(REQUIRED_ROLE_ID)) {
+            if (!ALLOWED_ROLE_IDS.some((roleId) => interaction.member.roles.cache.has(roleId))) {
                 return interaction.reply({
-                    content: 'Nemáš propojený účet s Minecraftem, pro návod navštiv kanál <#1344347947709763716>',
-                    flags: [MessageFlags.Ephemeral] // FIX: Using flags
+                    content: 'Nejsi součástí AT, použij prosím normální nápady pomocí /napad',
+                    flags: [MessageFlags.Ephemeral]
                 });
             }
 
@@ -57,12 +73,12 @@ export default {
                 }
             }
             
-            const suggestionsData = getSuggestionsData();
+            const suggestionsData = getATSuggestionsData();
             const newSuggestionId = suggestionsData.nextId;
 
             const modal = new ModalBuilder()
-                .setCustomId(`suggestion-modal_normal_${newSuggestionId}`)
-                .setTitle(`Zadej text k nápadu č.${newSuggestionId}`);
+                .setCustomId(`suggestion-modal_at_${newSuggestionId}`)
+                .setTitle(`Zadej text k AT nápadu č.${newSuggestionId}`);
 
             const serverSelect = new StringSelectMenuBuilder()
                 .setCustomId('server-select')
@@ -93,7 +109,7 @@ export default {
                 .setCustomId('suggestion-text')
                 .setStyle(TextInputStyle.Paragraph)
             	.setMaxLength(1000)
-                .setPlaceholder('Buď co nejvíce specifický, aby tě ostatní hráči pochopili. (Max 1000 písmen)')
+                .setPlaceholder('Buď co nejvíce specifický, aby tě ostatní členové AT pochopili. (Max 1000 písmen)')
                 .setRequired(true);
 
             const serverLabel = new LabelBuilder().setLabel("Jakého serveru se nápad týká?").setDescription('Můžeš vybrat více serverů.').setStringSelectMenuComponent(serverSelect);
@@ -116,13 +132,13 @@ export default {
 
             const getComponentData = (customId) => interaction.components.find(r => r.component.customId === customId)?.component;
 
-            const [_, suggestionId] = interaction.customId.split('_normal_');
+            const [_, suggestionId] = interaction.customId.split('_at_');
             const server = getComponentData('server-select').values.join(', ');
             const isAnonymous = getComponentData('anonymous-select').values[0] === 'true';
             const suggestionText = getComponentData('suggestion-text').value;
 
             const embed = new EmbedBuilder()
-                .setTitle(`Nápad #${suggestionId}`)
+                .setTitle(`AT Nápad #${suggestionId}`)
                 .setColor(0xEB853D)
                 .setFooter({ text: 'www.czech-survival.cz', iconURL: 'https://i.imgur.com/jNMbF95.png' })
                 .setTimestamp();
@@ -138,7 +154,7 @@ export default {
                 { name: 'Text Nápadu', value: suggestionText, inline: false }
             );
 
-            const suggestionsChannel = await interaction.client.channels.fetch(SUGGESTIONS_CHANNEL_ID);
+            const suggestionsChannel = await interaction.client.channels.fetch(AT_SUGGESTIONS_CHANNEL_ID);
             const suggestionMessage = await suggestionsChannel.send({ embeds: [embed] });
             
             await suggestionMessage.react('⬆️');
@@ -146,19 +162,19 @@ export default {
             
             await suggestionMessage.startThread({ name: `Diskuze k nápadu č.${suggestionId}`, autoArchiveDuration: 10080 });
 
-            const suggestionsData = getSuggestionsData();
+            const suggestionsData = getATSuggestionsData();
             suggestionsData.suggestions[suggestionId] = { messageId: suggestionMessage.id, authorId: interaction.user.id, status: 'pending' };
             suggestionsData.nextId++;
-            saveSuggestionsData(suggestionsData);
+            saveATSuggestionsData(suggestionsData);
 
             const logChannel = await interaction.client.channels.fetch(LOG_CHANNEL_ID);
             if (logChannel) {
-                const logEmbed = new EmbedBuilder().setTitle(`Nový Nápad Vytvořen (#${suggestionId})`).setColor('Blue').addFields({ name: 'Autor', value: `<@${interaction.user.id}> (${interaction.user.tag})`, inline: true }, { name: 'Anonymní', value: isAnonymous ? 'Ano' : 'Ne', inline: true }, { name: 'Odkaz na Nápad', value: `[Klikni zde](${suggestionMessage.url})`, inline: false }).setTimestamp();
+                const logEmbed = new EmbedBuilder().setTitle(`Nový AT Nápad Vytvořen (#${suggestionId})`).setColor('Blue').addFields({ name: 'Autor', value: `<@${interaction.user.id}> (${interaction.user.tag})`, inline: true }, { name: 'Anonymní', value: isAnonymous ? 'Ano' : 'Ne', inline: true }, { name: 'Odkaz na Nápad', value: `[Klikni zde](${suggestionMessage.url})`, inline: false }).setTimestamp();
                 await logChannel.send({ embeds: [logEmbed] });
             }
             
             cooldowns.set(interaction.user.id, Date.now() + COOLDOWN_DURATION);
-
+			
             await interaction.editReply({ content: `Tvůj nápad byl úspěšně odeslán! Najdeš ho v kanálu <#${suggestionsChannel.id}>.` });
 
         } catch (error) {

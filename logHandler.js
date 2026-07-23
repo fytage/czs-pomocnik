@@ -20,8 +20,9 @@ export async function handleLogTrigger(message) {
     const isHotspot = contentLower === 'hotspot';
     const isHeslo = command === 'heslo';
     const isPremium = command === 'premium';
+    const isFormular = command === 'formular';
 
-    if (!isLog && !isHotspot && !isHeslo && !isPremium) {
+    if (!isLog && !isHotspot && !isHeslo && !isPremium && !isFormular) {
         return false;
     }
 
@@ -44,7 +45,7 @@ export async function handleLogTrigger(message) {
         
         if (isHotspot) {
             await message.delete();
-            await message.channel.send('Ahoj, prosím počkej na někoho z vedení, aby ti připojení přes hotspot povolil. ||<@320941008370270210> <@425662532695490561> <@490599116477562913>||\n-# Tato zpráva byla vyžádána živým člověkem, takže o tvém ticketu již víme.');
+            await message.channel.send('Ahoj, prosím počkej na někoho z vedení, aby ti připojení přes hotspot povolil. ||<@270181199215853568> <@320941008370270210> <@660139979703451660>||\n-# Tato zpráva byla vyžádána živým člověkem, takže o tvém ticketu již víme.');
             
             return true;
         }
@@ -62,6 +63,13 @@ export async function handleLogTrigger(message) {
             
             await message.channel.send(`Tvé staré heslo bylo změněno na ||**${argument}**||. Tohle je pouze dočasné heslo a musíš si ho změnit. \nTo uděláš následovně:\n* Připojíš se na náš Minecraft server\n* Přihlásíš se pomocí hesla ||**${argument}**||\n* Napíšeš příkaz /changepassword ||**${argument}**|| novéHeslo\nSamozřejmě místo novéHeslo si napíšeš své vlastní heslo. *(např. /changepassword ||**${argument}**|| jajsempepa123)*\n\nJakmile si heslo úspěšně změníš, prosím informuj nás o tom abychom mohli zavřít ticket.`);
 
+            return true;
+        }
+        
+        if (isFormular) {
+            await message.delete();
+            await message.channel.send('Ahoj, permanentní bany se řeší na našem webu. U tohoto typu banu nelze požádat o unban přes tickety a musíš si vyplnit formulář: https://www.czech-survival.cz/unban-formular\n\nFormuláře z webu se neřeší tak aktivně jako tickety, takže je možné, že na přijetí nebo odmítnutí si počkáš i několik měsíců. Prosím nevytvářej si další unban tickety, tím proces neurychlíš.');
+            
             return true;
         }
 
