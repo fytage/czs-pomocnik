@@ -1,9 +1,9 @@
 {
   "java": {
-    "uptimeStart": 1772621438682,
+    "uptimeStart": 1784578049800,
     "downtimeStart": null,
     "lastData": {
-      "ip": "203.23.179.155",
+      "ip": "5.39.202.29",
       "port": 25565,
       "debug": {
         "ping": true,
@@ -15,8 +15,8 @@
         "cnameinsrv": false,
         "animatedmotd": false,
         "cachehit": false,
-        "cachetime": 1772621618,
-        "cacheexpire": 1772621738,
+        "cachetime": 1784796214,
+        "cacheexpire": 1784796514,
         "apiversion": 2,
         "dns": {
           "error": {
@@ -39,7 +39,7 @@
             {
               "name": "eu.mc.lb.gamershield.pro",
               "type": "A",
-              "address": "203.23.179.155"
+              "address": "5.39.202.29"
             }
           ]
         },
@@ -49,26 +49,26 @@
       },
       "motd": {
         "raw": [
-          "§r      §r§#F03A3D§r§#F03A3D§m---⚌§r§#F03A3D[§r§#F03A3D§r§#F03A3D§l§r§#EB853D§lC§r§#EB7F3D§lz§r§#EC793D§le§r§#EC723D§lc§r§#ED6C3D§lh§r§#ED663D§lS§r§#EE603D§lu§r§#EE593D§lr§r§#EE533D§lv§r§#EF4D3D§li§r§#EF473D§lv§r§#F0403D§la§r§#F03A3D§ll§r§#F03A3D]§r§#F03A3D§m⚌---§r§#EB853D§r§#EB853D§l »§r§#EB853D §r§#EB853D§r§#EB853D1§r§#EC7A3D.§r§#EC703D9§r§#ED653D-§r§#EE5A3D1§r§#EF4F3D.§r§#EF453D2§r§#F03A3D1§r§#EB853D §r§#EB853D§l«§r",
-          "§r§#F03A3D            ❤ §r§#EB853D§r§#EB853D§lVelký update již brzy!§r§#EB853D §r§#F03A3D❤§r"
+          "§r     §r§#9B0101§r§#9B0101§m---⚌§r§#9B0101[§r§#9B0101§r§#9B0101§l§r§#391818§lC§r§#491414§lz§r§#5A1010§le§r§#6A0D0D§lc§r§#7A0909§lh§r§#8B0505§lS§r§#9B0101§lu§r§#8B0505§lr§r§#7A0909§lv§r§#6A0D0D§li§r§#5A1010§lv§r§#491414§la§r§#391818§ll§r§#9B0101]§r§#9B0101§m⚌---§r§#9B0101§r§#9B0101§l »§r§#9B0101 §r§#9B0101§r§#9B0101§r§#3918181§r§#4F1313.§r§#650E0E9§r§#7A0909-§r§#90040426§r§#7A0909.§r§#650E0E1§r§#4F1313.§r§#3918182§r§#9B0101 §r§#9B0101§l«§r",
+          "§r§#942525   📻 §r§#BD1515§r§#BD1515§lNová letní Stranger Things sezóna!§r§#BD1515 §r§#942525📻§r"
         ],
         "clean": [
-          "      ---⚌[CzechSurvival]⚌--- » 1.9-1.21 «",
-          "            ❤ Velký update již brzy! ❤"
+          "     ---⚌[CzechSurvival]⚌--- » 1.9-26.1.2 «",
+          "   📻 Nová letní Stranger Things sezóna! 📻"
         ],
         "html": [
-          "      <span style=\"color: #F03A3D;\"><span style=\"text-decoration: line-through;\">---⚌</span></span><span style=\"color: #F03A3D;\">[</span><span style=\"color: #F03A3D;\"></span><span style=\"color: #EB853D;\"><span style=\"font-weight: bold;\">C</span></span><span style=\"color: #EB7F3D;\"><span style=\"font-weight: bold;\">z</span></span><span style=\"color: #EC793D;\"><span style=\"font-weight: bold;\">e</span></span><span style=\"color: #EC723D;\"><span style=\"font-weight: bold;\">c</span></span><span style=\"color: #ED6C3D;\"><span style=\"font-weight: bold;\">h</span></span><span style=\"color: #ED663D;\"><span style=\"font-weight: bold;\">S</span></span><span style=\"color: #EE603D;\"><span style=\"font-weight: bold;\">u</span></span><span style=\"color: #EE593D;\"><span style=\"font-weight: bold;\">r</span></span><span style=\"color: #EE533D;\"><span style=\"font-weight: bold;\">v</span></span><span style=\"color: #EF4D3D;\"><span style=\"font-weight: bold;\">i</span></span><span style=\"color: #EF473D;\"><span style=\"font-weight: bold;\">v</span></span><span style=\"color: #F0403D;\"><span style=\"font-weight: bold;\">a</span></span><span style=\"color: #F03A3D;\"><span style=\"font-weight: bold;\">l</span></span><span style=\"color: #F03A3D;\">]</span><span style=\"color: #F03A3D;\"><span style=\"text-decoration: line-through;\">⚌---</span></span><span style=\"color: #EB853D;\"><span style=\"font-weight: bold;\"> »</span></span><span style=\"color: #EB853D;\"> </span><span style=\"color: #EB853D;\">1</span><span style=\"color: #EC7A3D;\">.</span><span style=\"color: #EC703D;\">9</span><span style=\"color: #ED653D;\">-</span><span style=\"color: #EE5A3D;\">1</span><span style=\"color: #EF4F3D;\">.</span><span style=\"color: #EF453D;\">2</span><span style=\"color: #F03A3D;\">1</span><span style=\"color: #EB853D;\"> </span><span style=\"color: #EB853D;\"><span style=\"font-weight: bold;\">«</span></span>",
-          "<span style=\"color: #F03A3D;\">            ❤ </span><span style=\"color: #EB853D;\"><span style=\"font-weight: bold;\">Velký update již brzy!</span></span><span style=\"color: #EB853D;\"> </span><span style=\"color: #F03A3D;\">❤</span>"
+          "     <span style=\"color: #9B0101;\"><span style=\"text-decoration: line-through;\">---⚌</span></span><span style=\"color: #9B0101;\">[</span><span style=\"color: #9B0101;\"></span><span style=\"color: #391818;\"><span style=\"font-weight: bold;\">C</span></span><span style=\"color: #491414;\"><span style=\"font-weight: bold;\">z</span></span><span style=\"color: #5A1010;\"><span style=\"font-weight: bold;\">e</span></span><span style=\"color: #6A0D0D;\"><span style=\"font-weight: bold;\">c</span></span><span style=\"color: #7A0909;\"><span style=\"font-weight: bold;\">h</span></span><span style=\"color: #8B0505;\"><span style=\"font-weight: bold;\">S</span></span><span style=\"color: #9B0101;\"><span style=\"font-weight: bold;\">u</span></span><span style=\"color: #8B0505;\"><span style=\"font-weight: bold;\">r</span></span><span style=\"color: #7A0909;\"><span style=\"font-weight: bold;\">v</span></span><span style=\"color: #6A0D0D;\"><span style=\"font-weight: bold;\">i</span></span><span style=\"color: #5A1010;\"><span style=\"font-weight: bold;\">v</span></span><span style=\"color: #491414;\"><span style=\"font-weight: bold;\">a</span></span><span style=\"color: #391818;\"><span style=\"font-weight: bold;\">l</span></span><span style=\"color: #9B0101;\">]</span><span style=\"color: #9B0101;\"><span style=\"text-decoration: line-through;\">⚌---</span></span><span style=\"color: #9B0101;\"><span style=\"font-weight: bold;\"> »</span></span><span style=\"color: #9B0101;\"> </span><span style=\"color: #391818;\">1</span><span style=\"color: #4F1313;\">.</span><span style=\"color: #650E0E;\">9</span><span style=\"color: #7A0909;\">-</span><span style=\"color: #900404;\">26</span><span style=\"color: #7A0909;\">.</span><span style=\"color: #650E0E;\">1</span><span style=\"color: #4F1313;\">.</span><span style=\"color: #391818;\">2</span><span style=\"color: #9B0101;\"> </span><span style=\"color: #9B0101;\"><span style=\"font-weight: bold;\">«</span></span>",
+          "<span style=\"color: #942525;\">   📻 </span><span style=\"color: #BD1515;\"><span style=\"font-weight: bold;\">Nová letní Stranger Things sezóna!</span></span><span style=\"color: #BD1515;\"> </span><span style=\"color: #942525;\">📻</span>"
         ]
       },
       "players": {
-        "online": 31,
+        "online": 37,
         "max": 250
       },
-      "version": "1.7.2-1.21.11",
+      "version": "1.7.2-26.1.1",
       "online": true,
-      "protocol": 774,
-      "protocol_name": "1.21.11",
+      "protocol": 775,
+      "protocol_name": "26.1.2",
       "hostname": "mc.czech-survival.cz",
       "icon": "data:image/png;base64,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",
       "software": "Velocity",
@@ -76,7 +76,7 @@
     }
   },
   "bedrock": {
-    "uptimeStart": 1772621380505,
+    "uptimeStart": 1784394939180,
     "downtimeStart": null,
     "lastData": {
       "ip": "5.39.202.29",
@@ -91,8 +91,8 @@
         "cnameinsrv": false,
         "animatedmotd": false,
         "cachehit": false,
-        "cachetime": 1772621559,
-        "cacheexpire": 1772621679,
+        "cachetime": 1784796030,
+        "cacheexpire": 1784796330,
         "apiversion": 2,
         "dns": {
           "a": [
@@ -109,27 +109,27 @@
       },
       "motd": {
         "raw": [
-          "§r§c---⚌[§r§v§lC§r§v§lz§r§v§le§r§c§lc§r§c§lh§r§c§lS§r§c§lu§r§c§lr§r§c§lv§r§c§li§r§c§lv§r§c§la§r§c§ll§r§c]⚌---§r§v§l »§r§v 1§r§v.§r§c9§r§c-§r§c1§r§c.§r§c2§r§c1§r§v §l«§r"
+          "---⚌[CzechSurvival]⚌--- » 1.9-26.1.2 «"
         ],
         "clean": [
-          "---⚌[CzechSurvival]⚌--- » 1.9-1.21 «"
+          "---⚌[CzechSurvival]⚌--- » 1.9-26.1.2 «"
         ],
         "html": [
-          "<span style=\"color: #FF5555;\">---⚌[</span><span style=\"font-weight: bold; color: #EB7114;\">C</span><span style=\"font-weight: bold; color: #EB7114;\">z</span><span style=\"font-weight: bold; color: #EB7114;\">e</span><span style=\"font-weight: bold; color: #FF5555;\">c</span><span style=\"font-weight: bold; color: #FF5555;\">h</span><span style=\"font-weight: bold; color: #FF5555;\">S</span><span style=\"font-weight: bold; color: #FF5555;\">u</span><span style=\"font-weight: bold; color: #FF5555;\">r</span><span style=\"font-weight: bold; color: #FF5555;\">v</span><span style=\"font-weight: bold; color: #FF5555;\">i</span><span style=\"font-weight: bold; color: #FF5555;\">v</span><span style=\"font-weight: bold; color: #FF5555;\">a</span><span style=\"font-weight: bold; color: #FF5555;\">l</span><span style=\"color: #FF5555;\">]⚌---</span><span style=\"font-weight: bold; color: #EB7114;\"> »</span><span style=\"color: #EB7114;\"> 1</span><span style=\"color: #EB7114;\">.</span><span style=\"color: #FF5555;\">9</span><span style=\"color: #FF5555;\">-</span><span style=\"color: #FF5555;\">1</span><span style=\"color: #FF5555;\">.</span><span style=\"color: #FF5555;\">2</span><span style=\"color: #FF5555;\">1</span><span style=\"color: #EB7114;\"> </span><span style=\"font-weight: bold; color: #EB7114;\">«</span>"
+          "---⚌[CzechSurvival]⚌--- » 1.9-26.1.2 «"
         ]
       },
       "players": {
-        "online": 30,
+        "online": 38,
         "max": 250
       },
-      "version": "26.0",
+      "version": "26.30",
       "online": true,
-      "protocol": 924,
-      "protocol_name": "1.26.0",
+      "protocol": 1001,
+      "protocol_name": "1.26.30",
       "hostname": "bedrock.czech-survival.cz",
-      "map": "§r§c            ❤ §r§v§lVelký update již brzy!§r§v §r§c❤",
+      "map": "📻 Nová letní Stranger Things sezóna! 📻",
       "gamemode": "Survival",
-      "serverid": "5249332869346245491"
+      "serverid": "13953513612335102639"
     }
   }
 }

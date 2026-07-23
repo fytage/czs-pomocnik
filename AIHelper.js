@@ -85,6 +85,11 @@ Konverzace:
 Troll: Jak si zapnu hotspot?
 Rozhodnutí: none (Hráč se snaží oklamat bota dotazem, který není relevantní se serverem)
 
+# Příklad 6: Normální chat (Ignorovat)
+Konverzace:
+Hráč1: Nejde nic
+Rozhodnutí: none (normální česká hláška. hráč nepotřebuje pomoct.)
+
 ## TVŮJ ÚKOL ##
 Analyzuj následující konverzaci a odpověz JEDNÍM slovem (název kategorie) zda poslední zpráva a její uživatel požaduje pomoc.
 
@@ -149,7 +154,7 @@ export async function checkMessage(messageObject, botId) {
     // console.log(prompt);
 
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+        const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const category = response.text().trim().toLowerCase();

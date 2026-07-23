@@ -137,6 +137,16 @@ const NAPAD_COMMAND = {
   options: []
 };
 
+const AT_NAPAD_COMMAND = {
+  name: 'at-napad',
+  guild_id: '484381897900949525',
+  type: 1, // 1 = CHAT_INPUT (a slash command)
+  description: 'Odešli nový AT nápad pro server nebo Discord.',
+  integration_types: [0], // 0 = Guild Install, 1 = User Install
+  contexts: [0],       // 0 = Guild, 1 = Bot DM, 2 = Private Channel
+  options: []
+};
+
 const GCREATE_COMMAND = {
     name: 'gcreate',
     type: 1, // CHAT_INPUT
@@ -253,6 +263,7 @@ const ALL_COMMANDS = [
   SAY_COMMAND,
   INFO_COMMAND,
   NAPAD_COMMAND,
+  AT_NAPAD_COMMAND,
   APPROVE_SUGGESTION_COMMAND,
   CONSIDER_SUGGESTION_COMMAND,
   DENY_SUGGESTION_COMMAND,

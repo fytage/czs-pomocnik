@@ -19,7 +19,7 @@ export default {
         const allowedUserId = '743455055193047142'; // Replace with the specific user ID
         if (interaction.user.id !== allowedUserId) {
             return interaction.reply({
-                content: "Nemáš práva na použití tohoto příkazu!",
+                content: "Pouze vývojář bota může použít tento příkaz! (<@743455055193047142>)",
                 ephemeral: true,
             });
         }
