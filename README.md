@@ -14,7 +14,7 @@ když se budu asi fakt hodně nudit a nebudu mít vůbec co na práci, jinak to 
 Samozřejmě se mi ozvěte pokud budete mít problém s nastavením na [Discordu](https://discord.com/users/743455055193047142), pokud nepůjde link tak @fytg
 
 
-Nezapomeňte prosím, že tento kód je pod licencí MIT, což znamená že **NEMÁTE** legálně právo upravovat nebo mazat soubor **LICENSE**. Na pár místech v botovi mám
+Nezapomeňte prosím na to, že tento projekt je pod licencí MIT. Najděte si informace sami k tomu, co můžete a nemůžete dělat. Na pár místech v botovi mám
 napsané své jméno jako menší credit, udělali by jste mi radost, pokud by jste to tam nechali. Byl bych taky moc rád pokud by jste dali do popisku (bia) svého bota credit na tento repozitář.
 
 Aktuální pomocník již není spravován mnou a *originální* verze byla přejmenována na CZS Pomocník (CE) [to znamená Community Edition, "Komunitní Edice"], který bude stále v mém vlastním zájmu aktualizován i tady. Kopie tohoto kódu která momentálně na původním serveru běží je closed-source a není k dispozici.
